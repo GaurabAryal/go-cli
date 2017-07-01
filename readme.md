@@ -1,1 +1,1 @@
-#Going through GO CLI training
+Going through GO CLI training
