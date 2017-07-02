@@ -33,11 +33,11 @@ func addRun(cmd *cobra.Command, args []string) {
 		for _, x := range args {
 			items = append(items, todo.Item{Text:x})
 		}
-		err := todo.SaveItems("/Users/garyal/.tridos.json", items)
+		err := todo.SaveItems("/Users/gaurabaryal/.tridos.json", items)
 		if err != nil {
 			fmt.Errorf("%v", err)
 		}
-}
+} 
 
 func init() {
 	RootCmd.AddCommand(addCmd)
