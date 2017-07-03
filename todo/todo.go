@@ -19,3 +19,16 @@ func SaveItems(filename string, items []Item) error {
   }
   return nil
 }
+
+//([]Item, error) just specify the return types
+func ReadItems(filename string) ([]Item, error) {
+  b, err := ioutil.ReadFile(filename)
+  if err != nil {
+    return []Item{}, err
+  }
+  var items []Item
+  if err := json.Unmarshal(b, &items); err != nil {
+    return []Item{}, err
+  }
+  return []Item{}, nil
+}
