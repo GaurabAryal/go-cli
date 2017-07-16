@@ -1,7 +1,6 @@
 package todo
 import (
   "io/ioutil"
-  "fmt"
   "encoding/json"
 )
 
@@ -23,16 +22,14 @@ func SaveItems(filename string, items []Item) error {
 
 //([]Item, error) just specify the return types
 func ReadItems(filename string) ([]Item, error) {
-  fmt.Println(filename)
   b, err := ioutil.ReadFile(filename)
   if err != nil {
     return []Item{}, err
   }
   var items []Item
-  data := json.Unmarshal(b, &items);
-  fmt.Println(err)
-  if  data != nil {
-    return []Item{}, data
+  data := json.Unmarshal([]byte(b), &items);
+  if  items != nil {
+    return items, data
   }
   return []Item{}, nil
 }
