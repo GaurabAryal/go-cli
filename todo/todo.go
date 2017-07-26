@@ -35,7 +35,6 @@ func ReadItems(filename string) ([]Item, error) {
   return []Item{}, nil
 }
 
-//why can't we just default assign to pri variable? 
 func (i *Item) SetPriority(pri int) {
   switch pri {
   case 1:
