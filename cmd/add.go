@@ -19,7 +19,7 @@ import (
 	"github.com/spf13/cobra"
 	"go-cli/todo"
 )
-
+var priority int
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add",
@@ -34,7 +34,9 @@ func addRun(cmd *cobra.Command, args []string) {
 			fmt.Errorf("%v", err)
 		}
 		for _, x := range args {
-			items = append(items, todo.Item{Text:x})
+			item := todo.Item{Text: x}
+			item.SetPriority(priority)
+			items = append(items, item)
 		}
 		err = todo.SaveItems(dataFile, items)
 		if err != nil {
@@ -44,7 +46,8 @@ func addRun(cmd *cobra.Command, args []string) {
 
 func init() {
 	RootCmd.AddCommand(addCmd)
-
+	addCmd.Flags().IntVarP(&priority,
+		"priority", "p", 2, "Priority: 1, 2, 3")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
