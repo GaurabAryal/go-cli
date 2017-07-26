@@ -23,7 +23,7 @@ import (
 )
 
 var cfgFile string
-
+var dataFile string
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "go-cli",
@@ -54,6 +54,14 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
+	home, err := homedir.Dir()
+	if err != nil {
+		fmt.Println("Unable to detect home directory. Please st data file using --datafile.")
+	}
+	RootCmd.PersistentFlags().StringVar(&dataFile,
+		"datafile",
+		home + string(os.PathSeparator) + ".tridos.json",
+		"data file to store todos")
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-cli.yaml)")
 
 	// Cobra also supports local flags, which will only run
