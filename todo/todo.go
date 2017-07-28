@@ -2,11 +2,17 @@ package todo
 import (
   "io/ioutil"
   "encoding/json"
+  "strconv"
 )
 
 type Item struct {
   Text string
   Priority int
+  position int
+}
+
+func (i *Item) Label() string {
+  return strconv.Itoa(i.position) + "."
 }
 
 func SaveItems(filename string, items []Item) error {
@@ -32,7 +38,10 @@ func ReadItems(filename string) ([]Item, error) {
   if  items != nil {
     return items, data
   }
-  return []Item{}, nil
+  for i, _ := range items {
+    items[i].position = i + 1
+  }
+  return items, nil
 }
 
 func (i *Item) SetPriority(pri int) {
